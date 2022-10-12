@@ -1,0 +1,16 @@
+.card{
+  border: 2px solid #F4F4F9;
+  border-radius: 4px;
+  padding: .5rem;
+  display: grid;
+  justify-content: center;
+  background-color: #B8DBD9;
+}
+
+.delete-button{
+  background-color: #E9190F;
+  color:white;
+  border-radius: 4px;
+  margin-top:10px;
+  cursor: pointer;
+}
