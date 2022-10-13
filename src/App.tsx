@@ -13,7 +13,7 @@ function App() {
     dispatch(getPeople());  
   },[])
 
-  const people = PeopleReducer.people;
+  const people = PeopleReducer?.people;
 
   if(people){
     return (

@@ -1,4 +1,4 @@
-const InitialPeopleState= {
+const InitialPeopleState = {
   people: undefined
 }
 
