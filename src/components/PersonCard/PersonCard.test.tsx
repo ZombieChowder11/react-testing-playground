@@ -35,10 +35,13 @@ afterAll(() => server.close())
 
 
 describe('Testing the person card', () => {
-
+  
+  it('should test the initial reducer state', () => {
+    expect(reducer(undefined, {})).toEqual({});
+  });
 
   it("should fetch data", async () => {
-    const {data}  = await axios.get('https://jsonplaceholder.typicode.com/users');
+    const { data }  = await axios.get('https://jsonplaceholder.typicode.com/users');
     expect(data).toEqual(mockData);
   });
 
@@ -102,10 +105,5 @@ describe('Testing the person card', () => {
 
     expect(reducer(mockData, actions.deletePerson(1))).toEqual({ people: [] });
   });
-
-  it('should test the initial reducer state', () => {
-    expect(reducer(undefined, {})).toEqual({});
-  });
-
 
 });
