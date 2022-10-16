@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react';
-import { getPeople } from './store/actions/peopleActions';
 import { useAppDispatch, useAppSelector } from './common/hooks';
 import PersonCard from './components/PersonCard';
+import { fetchPeople, selectPeople } from './store/slices/peopleSlice';
 
 import './App.scss';
 
+
 function App() {
   const dispatch = useAppDispatch();
+  const people = useAppSelector(selectPeople);
   const PeopleReducer = useAppSelector((state: any) => state.PeopleReducer);
-  
+
   useEffect(()=>{
-    dispatch(getPeople());  
+   dispatch(fetchPeople())
+   console.log(people)
   },[])
 
-  const people = PeopleReducer?.people;
+
 
   if(people){
     return (

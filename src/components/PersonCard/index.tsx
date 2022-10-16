@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../common/hooks';
-import { deletePerson } from '../../store/actions/peopleActions';
 import './PersonCard.scss';
 
 interface IPersonCardProps{
@@ -32,7 +31,7 @@ const PersonCard = (props:IPersonCardProps) =>{
   
    const dispatch = useAppDispatch();
 
-   const deleteCard=()=>dispatch(deletePerson(id));
+  
 
   return(
       <div className="card">
@@ -40,7 +39,7 @@ const PersonCard = (props:IPersonCardProps) =>{
         <div>Email: {email}</div>
         <div>Phone: <b>{phone}</b></div>
         <div>Web: {website}</div>
-        <button className="delete-button" onClick={deleteCard}>DELETE</button>
+        <button className="delete-button" onClick={()=>{}}>DELETE</button>
       </div>
 
   )
