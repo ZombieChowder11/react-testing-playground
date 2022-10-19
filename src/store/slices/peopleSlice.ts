@@ -4,8 +4,7 @@ import proxie from '../proxie';
 
 const initialState = {
   people: [],
-  status: 'idle',
-  error: '' || undefined
+  status: 'idle'
 }
 
 export const fetchPeople = createAsyncThunk('posts/fetchPosts', async () => {
@@ -22,8 +21,19 @@ export const peopleSlice = createSlice({
     }
   },
   extraReducers:(builder) =>{
-    builder.addCase(fetchPeople.fulfilled, (state, action) => {
-      return action.payload;
+    builder
+    // .addCase(fetchPeople.fulfilled, (state, action) => {
+    //   return action.payload;
+    // })
+    .addCase(fetchPeople.pending, (state, action) => {
+      state.status = 'loading'
+    })
+    .addCase(fetchPeople.fulfilled, (state, action) => {
+      state.status = 'succeeded'
+      state.people = state.people.concat(action.payload)
+    })
+    .addCase(fetchPeople.rejected, (state, action) => {
+      state.status = 'failed'
     })
   }
 });

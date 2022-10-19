@@ -9,14 +9,13 @@ import './App.scss';
 function App() {
   const dispatch = useAppDispatch();
   const people = useAppSelector(selectPeople);
-  const PeopleReducer = useAppSelector((state: any) => state.PeopleReducer);
+  const peopleStatus = useAppSelector(state => state.people.status)
 
-  useEffect(()=>{
-   dispatch(fetchPeople())
-   console.log(people)
-  },[])
-
-
+  useEffect(() => {
+    if (peopleStatus === 'idle') {
+      dispatch(fetchPeople())
+    }
+  }, [peopleStatus, dispatch])
 
   if(people){
     return (
