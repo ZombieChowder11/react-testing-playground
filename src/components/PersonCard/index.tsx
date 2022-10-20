@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../common/hooks';
+import { deletePeople } from '../../store/slices/peopleSlice';
 import './PersonCard.scss';
 
 interface IPersonCardProps{
@@ -28,10 +29,8 @@ interface IPersonCardProps{
 
 const PersonCard = (props:IPersonCardProps) =>{
    const {id, name, email, address, phone, website, company} = props;
-  
+    
    const dispatch = useAppDispatch();
-
-  
 
   return(
       <div className="card">
@@ -39,7 +38,7 @@ const PersonCard = (props:IPersonCardProps) =>{
         <div>Email: {email}</div>
         <div>Phone: <b>{phone}</b></div>
         <div>Web: {website}</div>
-        <button className="delete-button" onClick={()=>{}}>DELETE</button>
+        <button className="delete-button" onClick={()=> dispatch(deletePeople(id))}>DELETE</button>
       </div>
 
   )

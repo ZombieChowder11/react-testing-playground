@@ -17,7 +17,7 @@ export const peopleSlice = createSlice({
   initialState,
   reducers: {
     deletePeople: (state, action) => {
-      state.people?.filter((a:any)=>a.id !== action.payload.id);
+      state.people.splice(action.payload.id, 1)
     }
   },
   extraReducers:(builder) =>{
