@@ -1,6 +1,6 @@
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-import { screen } from '@testing-library/react'
+import { getByRole, getByText, screen } from '@testing-library/react'
 import axios from "axios";
 import { mockData } from '../../mocks/peopleMock';
 import PersonCard from '.';
@@ -28,36 +28,47 @@ afterEach(() => server.resetHandlers())
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
 
-
-test('fetches & receives a user after clicking the fetch user button', async () => {
- 
-  const cardProps =     {
-    id: 1,
-    name: "Leanne Graham",
-    username: "Bret",
-    email: "Sincere@april.biz",
-    address: {
-      street: "Kulas Light",
-      suite: "Apt. 556",
-      city: "Gwenborough",
-      zipcode: "92998-3874",
-      geo: {
-        lat: "-37.3159",
-        lng: "81.1496"
-      }
-    },
-    phone: "1-770-736-8031 x56442",
-    website: "hildegard.org",
-    company: {
-      name: "Romaguera-Crona",
-      catchPhrase: "Multi-layered client-server neural-net",
-      bs: "harness real-time e-markets"
+const cardProps =     {
+  id: 1,
+  name: "Leanne Graham",
+  username: "Bret",
+  email: "Sincere@april.biz",
+  address: {
+    street: "Kulas Light",
+    suite: "Apt. 556",
+    city: "Gwenborough",
+    zipcode: "92998-3874",
+    geo: {
+      lat: "-37.3159",
+      lng: "81.1496"
     }
+  },
+  phone: "1-770-736-8031 x56442",
+  website: "hildegard.org",
+  company: {
+    name: "Romaguera-Crona",
+    catchPhrase: "Multi-layered client-server neural-net",
+    bs: "harness real-time e-markets"
   }
-  renderWithProviders(<PersonCard {...cardProps}/>)
+}
 
-  expect(screen.getByText(/Name:/i)).toBeInTheDocument()
-  expect(screen.getByText(/Email:/i)).toBeInTheDocument()
+describe('Person Card', ()=>{
+  test('shoud fetc & receives a user after the component renders', async () => {
+ 
+    renderWithProviders(<PersonCard {...cardProps}/>)
+  
+    expect(screen.getByText(/Name:/i)).toBeInTheDocument()
+    expect(screen.getByText(/Email:/i)).toBeInTheDocument()
+  
+    expect(await screen.findByText(/Leanne Graham/i)).toBeInTheDocument()
+  })
 
-  expect(await screen.findByText(/Leanne Graham/i)).toBeInTheDocument()
+  test('should check if the button is rendered.', ()=> {
+    const { getByText } =  renderWithProviders(<PersonCard {...cardProps}/>);
+    const deleteButton = getByText('DELETE');
+    expect(deleteButton).toBeTruthy()
+    
+  })
+
 })
+
