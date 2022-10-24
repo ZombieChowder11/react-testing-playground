@@ -3,9 +3,10 @@ import { useAppDispatch } from '../../common/hooks';
 import { deletePeople } from '../../store/slices/peopleSlice';
 import './PersonCard.scss';
 
-interface IPersonCardProps{
+export interface IPersonCardProps{
   id:number;
   name:string,
+  username: string,
   email:string,
   address:{
     street:string,
