@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppDispatch, useAppSelector } from '../../common/hooks';
+import { useAppDispatch } from '../../common/hooks';
 import { deletePeople } from '../../store/slices/peopleSlice';
 import './PersonCard.scss';
 
