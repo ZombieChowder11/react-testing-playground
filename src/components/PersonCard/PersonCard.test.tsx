@@ -1,10 +1,8 @@
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-import { getByRole, getByText, screen } from '@testing-library/react'
-import axios from "axios";
-import { mockData } from '../../mocks/peopleMock';
+import { screen } from '@testing-library/react'
+
 import PersonCard from '.';
-import { render } from "@testing-library/react";
 import { renderWithProviders } from '../../common/test-utils';
 import reducer, { deletePeople } from '../../store/slices/peopleSlice';
 
@@ -28,7 +26,7 @@ afterEach(() => server.resetHandlers())
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
 
-const cardProps =     {
+const cardProps = {
   id: 1,
   name: "Leanne Graham",
   username: "Bret",
@@ -53,24 +51,24 @@ const cardProps =     {
 }
 
 describe('Person Card', ()=>{
-  test('shoud fetc & receives a user after the component renders', async () => {
+  it('shoud fetch & receives a user after the component renders', async () => {
  
     renderWithProviders(<PersonCard {...cardProps}/>)
   
     expect(screen.getByText(/Name:/i)).toBeInTheDocument()
     expect(screen.getByText(/Email:/i)).toBeInTheDocument()
+    expect(screen.getByText(/Phone:/i)).toBeInTheDocument()
   
     expect(await screen.findByText(/Leanne Graham/i)).toBeInTheDocument()
   });
 
-  test('should check if the button is rendered.', () => {
+  it('should check if the button is rendered.', () => {
     const { getByText } =  renderWithProviders(<PersonCard {...cardProps}/>);
     const deleteButton = getByText('DELETE');
-    expect(deleteButton).toBeTruthy()
-    
+    expect(deleteButton).toBeTruthy();
   });
 
-  test('should test the DELETE button`s functionality.', () => {
+  it('should test the DELETE button`s functionality.', () => {
     const people:any = [
       {
         id: 1,
