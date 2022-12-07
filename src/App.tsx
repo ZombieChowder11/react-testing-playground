@@ -21,8 +21,8 @@ function App() {
     return (
       <div className="App">
         <div className="card-wrapper">
-          {people.map((person:any)=>{
-            return <PersonCard {...person} />
+          {people.map((person:any, index:number)=>{
+            return <PersonCard {...person} index={index + 1}/>
           })}
         </div>
    

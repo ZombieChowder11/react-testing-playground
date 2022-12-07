@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch } from '../../common/hooks';
 import { deletePeople } from '../../store/slices/peopleSlice';
+import AddressSection from '../AddressSection';
 import './PersonCard.scss';
 
 export interface IPersonCardProps{
@@ -25,13 +26,27 @@ export interface IPersonCardProps{
     catchPhrase: string,
     bs: string
   }
+  index:number;
 }
 
 
 const PersonCard = (props:IPersonCardProps) =>{
-   const {id, name, email, address, phone, website, company} = props;
+   const {id, name, email, address, phone, website, index} = props;
     
    const dispatch = useAppDispatch();
+   const [clicked, setClicked] = useState<boolean>(false);
+
+   const toggledCard = () => {
+    if(id === index){
+      setClicked(!clicked)
+    }
+   }
+   
+   const addressSectionProps = {
+     ...address,
+     clicked,
+     toggledCard
+   }
 
   return(
       <div className="card">
@@ -40,6 +55,8 @@ const PersonCard = (props:IPersonCardProps) =>{
         <div>Phone: <b>{phone}</b></div>
         <div>Web: {website}</div>
         <button className="delete-button" onClick={()=> dispatch(deletePeople(id))}>DELETE</button>
+        <button className="address-button" onClick={toggledCard}>INFO</button>
+        <AddressSection {...addressSectionProps} />
       </div>
 
   )
