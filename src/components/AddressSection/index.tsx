@@ -1,8 +1,6 @@
 import React from 'react';
 import './AddressSection.scss';
 
-
-
 interface IAddressSectionProps {
   street:string,
   city:string,
